@@ -1,0 +1,2 @@
+## Story 5
+**As** a university student with a tight budget, I **want** to compare the price of an order and delivery fee on different platforms and see if there is any coupon that I can apply to my order **so that** I can save money and time spent on comparing the price on apps back and forth. I also **want** to compare the delivery time if I order the food immediately/ at specific time slots on each platform **so that** by comparing the delivery time, I will spend less time waiting for my order.  

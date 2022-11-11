@@ -1,0 +1,2 @@
+# Story 3
+**As** a hungry University Student with a busy course schedule, **I want** to know the wait time for a food order through GrubHub ordering before placing my order, and be advised on placing that order now or later based on how much time I have until my next scheduled event on my calendar, **so that** I can make sure that I will have enough time to enjoy my food, not have to abandon my order and lose money, and lower the risk of being late to my next event. 
