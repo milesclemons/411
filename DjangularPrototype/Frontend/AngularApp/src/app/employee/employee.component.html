@@ -1,0 +1,22 @@
+<p>employee works!</p>
+
+<p>Hello there!</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Food</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of EmployeeList">
+            <td>{{dataItem.EmployeeId}}</td>
+            <td>{{dataItem.EmployeeName}}</td>
+            <td>{{dataItem.EmployeeFood}}</td>
+            <td>{{dataItem.EmployeeFoodUrl}}</td>
+        </tr>
+    </tbody>
+</table>
