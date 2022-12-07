@@ -1,0 +1,7 @@
+<p>Hey new user! Enter in the following information to create your new account with us </p>
+
+Name: <input [(ngModel)]="username"><br>
+Favorite Food: <input [(ngModel)]="favfood"> <br>
+<button (click)="create()" routerLink="/main">Submit</button> 
+
+<router-outlet></router-outlet>
