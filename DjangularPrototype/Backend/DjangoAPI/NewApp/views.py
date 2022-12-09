@@ -42,13 +42,27 @@ def testing(request, id):
   }
   return HttpResponse(template.render(context, request))
 
+###----------------- API Methods for User screen -----------------###
 @csrf_exempt
 def employeeApi(request,id=0):
-    if request.method=='GET':
+    ##------------------------GET------------------------##
+    #   returns all data from User table in Json Format
+    ##---------------------------------------------------##
+    if request.method=='GET'and id==0:
         employees = Employees.objects.all()
         employees_serializer = EmployeeSerializer(employees, many=True)
         return JsonResponse(employees_serializer.data, safe=False)
-
+      
+    ##------------------------GET SELECT------------------------##
+    #   returns data from user with the given ID
+    ##----------------------------------------------------------##
+    elif request.method=='GET'and id!=0:   
+        employee=Employees.objects.get(EmployeeId=id)
+        employee_serializer = EmployeeSerializer(employee)
+      
+    ##-----------------------POST-----------------------##
+    #   Used to insert new record into User Table
+    ##--------------------------------------------------##
     elif request.method=='POST':
         employee_data=JSONParser().parse(request)
         employee_serializer = EmployeeSerializer(data=employee_data)
@@ -57,6 +71,9 @@ def employeeApi(request,id=0):
             return JsonResponse("Added Successfully!!" , safe=False)
         return JsonResponse("Failed to Add.",safe=False)
     
+    ##-----------------------PUT-----------------------##
+    #   Used to update existing record
+    ##-------------------------------------------------##
     elif request.method=='PUT':
         employee_data = JSONParser().parse(request)
         employee=Employees.objects.get(EmployeeId=employee_data['EmployeeId'])
@@ -65,7 +82,10 @@ def employeeApi(request,id=0):
             employee_serializer.save()
             return JsonResponse("Updated Successfully!!", safe=False)
         return JsonResponse("Failed to Update.", safe=False)
-
+    
+    ##----------------------DELETE----------------------##
+    #   Used to delete an existing record
+    ##--------------------------------------------------##
     elif request.method=='DELETE':
         employee=Employees.objects.get(EmployeeId=id)
         employee.delete()
