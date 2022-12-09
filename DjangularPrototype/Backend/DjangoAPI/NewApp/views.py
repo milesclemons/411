@@ -59,6 +59,7 @@ def employeeApi(request,id=0):
     elif request.method=='GET'and id!=0:   
         employee=Employees.objects.get(EmployeeId=id)
         employee_serializer = EmployeeSerializer(employee)
+        return JsonResponse(employee_serializer.data, safe = False)
       
     ##-----------------------POST-----------------------##
     #   Used to insert new record into User Table
