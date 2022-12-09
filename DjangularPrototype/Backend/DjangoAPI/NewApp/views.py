@@ -8,7 +8,40 @@ from NewApp.serializers import EmployeeSerializer
 
 from django.core.files.storage import default_storage
 
+from django.http import HttpResponse
+from django.template import loader
+import http.client
+
 # Create your views here.
+  
+@csrf_exempt
+def form(request):
+  employees = Employees.objects.all().values()
+  template = loader.get_template('index.html')
+  context = {
+    'employees': employees,
+  }
+  return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+def select(request):
+  mydata = Employees.objects.filter(EmployeeId = '11').values()
+  template = loader.get_template('index.html')
+  context = {
+    'employees': mydata,
+  }
+  return HttpResponse(template.render(context, request))
+
+
+@csrf_exempt
+def testing(request, id):
+  mydata = Employees.objects.filter(EmployeeId = id).values()
+  template = loader.get_template('index.html')
+  context = {
+    'employees': mydata,
+  }
+  return HttpResponse(template.render(context, request))
+
 @csrf_exempt
 def employeeApi(request,id=0):
     if request.method=='GET':
@@ -45,6 +78,22 @@ def foodPicApi(request,id=0):
         employees_serializer = EmployeeSerializer(employees, many=True)
         return JsonResponse(employees_serializer.data, safe=False)
 """
+
+@csrf_exempt
+def recipe(request):
+  conn = http.client.HTTPSConnection("recipesapi2.p.rapidapi.com")
+
+  headers = {
+      'X-RapidAPI-Key': "010ca04508msh45bd4d297b578f4p1fc18bjsn5d648ac7eeea",
+      'X-RapidAPI-Host': "recipesapi2.p.rapidapi.com"
+      }
+
+  conn.request("GET", "/recipes/tomato%20soup?maxRecipes=2", headers=headers)
+
+  res = conn.getresponse()
+  data = res.read()
+
+  print(data.decode("utf-8"))
 
 
 @csrf_exempt
